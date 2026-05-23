@@ -17,7 +17,7 @@ USER spring:spring
 
 COPY --from=build /app/target/event-booking-*.jar app.jar
 
-EXPOSE 8084
+EXPOSE 8080
 
 #ENV SPRING_PROFILES_ACTIVE=prod
 
