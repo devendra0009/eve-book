@@ -1,0 +1,369 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8" />-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>-->
+<!--    <title>Firebase Auth Test</title>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--<h2>Firebase Authentication Demo</h2>-->
+
+<!--<div>-->
+<!--    <input type="email" id="email" placeholder="Enter email" />-->
+<!--    <br><br>-->
+
+<!--    <input type="password" id="password" placeholder="Enter password" />-->
+<!--    <br><br>-->
+
+<!--    <button onclick="signup()">Signup</button>-->
+<!--    <button onclick="login()">Login</button>-->
+<!--    <button onclick="callBackend()">Call Backend API</button>-->
+<!--</div>-->
+
+<!--<br>-->
+
+<!--<div>-->
+<!--    <h3>Response:</h3>-->
+<!--    <pre id="output"></pre>-->
+<!--</div>-->
+
+<!--<script type="module">-->
+
+<!--    // Firebase SDK Imports-->
+<!--    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";-->
+
+<!--    import {-->
+<!--        getAuth,-->
+<!--        createUserWithEmailAndPassword,-->
+<!--        signInWithEmailAndPassword-->
+<!--    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";-->
+
+
+<!--    // &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+<!--    // YOUR FIREBASE WEB CONFIG-->
+<!--    // &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+
+<!--&lt;!&ndash;    const firebaseConfig = {&ndash;&gt;-->
+<!--&lt;!&ndash;        apiKey: "YOUR_API_KEY",&ndash;&gt;-->
+<!--&lt;!&ndash;        authDomain: "YOUR_PROJECT.firebaseapp.com",&ndash;&gt;-->
+<!--&lt;!&ndash;        projectId: "YOUR_PROJECT_ID",&ndash;&gt;-->
+<!--&lt;!&ndash;        storageBucket: "YOUR_PROJECT.appspot.com",&ndash;&gt;-->
+<!--&lt;!&ndash;        messagingSenderId: "XXXXXXXX",&ndash;&gt;-->
+<!--&lt;!&ndash;        appId: "YOUR_APP_ID"&ndash;&gt;-->
+<!--&lt;!&ndash;    };&ndash;&gt;-->
+
+<!--const firebaseConfig = {-->
+<!--  apiKey: "AIzaSyBJ_vUx7HGRRR8e6UuOeNOFz4VCusZ54c4",-->
+<!--  authDomain: "fir-authentication-af31e.firebaseapp.com",-->
+<!--  projectId: "fir-authentication-af31e",-->
+<!--  storageBucket: "fir-authentication-af31e.firebasestorage.app",-->
+<!--  messagingSenderId: "657984039525",-->
+<!--  appId: "1:657984039525:web:69eedeee46e86da206348c",-->
+<!--  measurementId: "G-7KB2D2X4BW"-->
+<!--};-->
+
+
+
+<!--    // &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+<!--    // INIT FIREBASE-->
+<!--    // &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+
+<!--    const app = initializeApp(firebaseConfig);-->
+
+<!--    const auth = getAuth(app);-->
+
+
+<!--    // &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+<!--    // SIGNUP-->
+<!--    // &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+
+<!--    window.signup = async function () {-->
+
+<!--        const email = document.getElementById("email").value;-->
+<!--        const password = document.getElementById("password").value;-->
+
+<!--        try {-->
+
+<!--            const userCredential =-->
+<!--                await createUserWithEmailAndPassword(auth, email, password);-->
+
+<!--            document.getElementById("output").innerText =-->
+<!--                "Signup success:\n" +-->
+<!--                JSON.stringify(userCredential.user, null, 2);-->
+
+<!--        } catch (e) {-->
+
+<!--            document.getElementById("output").innerText =-->
+<!--                "Signup error:\n" + e.message;-->
+<!--        }-->
+<!--    };-->
+
+
+<!--    // &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+<!--    // LOGIN-->
+<!--    // &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+
+<!--    window.login = async function () {-->
+
+<!--        const email = document.getElementById("email").value;-->
+<!--        const password = document.getElementById("password").value;-->
+
+<!--        try {-->
+
+<!--            const userCredential =-->
+<!--                await signInWithEmailAndPassword(auth, email, password);-->
+
+<!--            document.getElementById("output").innerText =-->
+<!--                "Login success:\n" +-->
+<!--                JSON.stringify(userCredential.user, null, 2);-->
+
+<!--        } catch (e) {-->
+
+<!--            document.getElementById("output").innerText =-->
+<!--                "Login error:\n" + e.message;-->
+<!--        }-->
+<!--    };-->
+
+
+<!--    // &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+<!--    // CALL SPRING BOOT BACKEND-->
+<!--    // &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+
+<!--    window.callBackend = async function () {-->
+
+<!--        try {-->
+
+<!--            const user = auth.currentUser;-->
+
+<!--            if (!user) {-->
+<!--                alert("Please login first");-->
+<!--                return;-->
+<!--            }-->
+
+<!--            // Get Firebase JWT token-->
+<!--            const token = await user.getIdToken();-->
+
+<!--            console.log("Firebase Token:", token);-->
+
+<!--            // Call backend-->
+<!--            const response = await fetch("http://localhost:8080/api/test", {-->
+
+<!--                method: "GET",-->
+
+<!--                headers: {-->
+<!--                    "Authorization": `Bearer ${token}`-->
+<!--                }-->
+<!--            });-->
+
+<!--            const data = await response.text();-->
+
+<!--            document.getElementById("output").innerText =-->
+<!--                "Backend Response:\n" + data;-->
+
+<!--        } catch (e) {-->
+
+<!--            document.getElementById("output").innerText =-->
+<!--                "API Error:\n" + e.message;-->
+<!--        }-->
+<!--    };-->
+
+<!--</script>-->
+
+<!--</body>-->
+<!--</html>-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Firebase Auth Demo</title>
+</head>
+
+<body>
+
+<h2>Firebase Authentication Demo</h2>
+
+<input type="email" id="email" placeholder="Email">
+<br><br>
+
+<input type="password" id="password" placeholder="Password">
+<br><br>
+
+<button id="signupBtn">Signup</button>
+<button id="loginBtn">Login</button>
+<button id="backendBtn">Call Backend API</button>
+
+<br><br>
+
+<pre id="output"></pre>
+
+<script type="module">
+
+    import { initializeApp }
+        from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+    import {
+        getAuth,
+        createUserWithEmailAndPassword,
+        signInWithEmailAndPassword
+    }
+        from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+
+    // --------------------------------------------
+    // FIREBASE CONFIG
+    // --------------------------------------------
+
+  const firebaseConfig = {
+  apiKey: "AIzaSyBJ_vUx7HGRRR8e6UuOeNOFz4VCusZ54c4",
+  authDomain: "fir-authentication-af31e.firebaseapp.com",
+  projectId: "fir-authentication-af31e",
+  storageBucket: "fir-authentication-af31e.firebasestorage.app",
+  messagingSenderId: "657984039525",
+  appId: "1:657984039525:web:69eedeee46e86da206348c",
+  measurementId: "G-7KB2D2X4BW"
+};
+
+
+    // --------------------------------------------
+    // INIT FIREBASE
+    // --------------------------------------------
+
+    const app = initializeApp(firebaseConfig);
+
+    const auth = getAuth(app);
+
+
+    // --------------------------------------------
+    // SIGNUP
+    // --------------------------------------------
+
+    async function signup() {
+
+        const email =
+            document.getElementById("email").value;
+
+        const password =
+            document.getElementById("password").value;
+
+        try {
+
+            const userCredential =
+                await createUserWithEmailAndPassword(
+                    auth,
+                    email,
+                    password
+                );
+
+            document.getElementById("output").innerText =
+                "Signup Success\n\n" +
+                JSON.stringify(userCredential.user, null, 2);
+
+        } catch (e) {
+
+            document.getElementById("output").innerText =
+                "Signup Error:\n" + e.message;
+        }
+    }
+
+
+    // --------------------------------------------
+    // LOGIN
+    // --------------------------------------------
+
+    async function login() {
+
+        const email =
+            document.getElementById("email").value;
+
+        const password =
+            document.getElementById("password").value;
+
+        try {
+
+            const userCredential =
+                await signInWithEmailAndPassword(
+                    auth,
+                    email,
+                    password
+                );
+
+            document.getElementById("output").innerText =
+                "Login Success\n\n" +
+                JSON.stringify(userCredential.user, null, 2);
+
+        } catch (e) {
+
+            document.getElementById("output").innerText =
+                "Login Error:\n" + e.message;
+        }
+    }
+
+
+    // --------------------------------------------
+    // CALL BACKEND
+    // --------------------------------------------
+
+    async function callBackend() {
+
+        try {
+
+            const user = auth.currentUser;
+
+            if (!user) {
+                alert("Please login first");
+                return;
+            }
+
+            const token =
+                await user.getIdToken();
+
+            console.log("Firebase JWT:", token);
+
+            const response = await fetch(
+                "http://localhost:8084/api/test",
+                {
+                    method: "GET",
+
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+
+            const data = await response.text();
+
+            document.getElementById("output").innerText =
+                "Backend Response:\n\n" + data;
+
+        } catch (e) {
+
+            document.getElementById("output").innerText =
+                "Backend Error:\n" + e.message;
+        }
+    }
+
+
+    // --------------------------------------------
+    // BUTTON EVENTS
+    // --------------------------------------------
+
+    document
+        .getElementById("signupBtn")
+        .addEventListener("click", signup);
+
+    document
+        .getElementById("loginBtn")
+        .addEventListener("click", login);
+
+    document
+        .getElementById("backendBtn")
+        .addEventListener("click", callBackend);
+
+</script>
+
+</body>
+</html>

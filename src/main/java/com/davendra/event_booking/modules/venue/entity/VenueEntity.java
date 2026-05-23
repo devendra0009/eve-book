@@ -1,4 +1,4 @@
-package com.davendra.event_booking.modules.event.entity;
+package com.davendra.event_booking.modules.venue.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -25,6 +25,8 @@ public class VenueEntity {
     private String city;
 
     private String state;
+
+    private String country;
 
     private Double latitude;
 

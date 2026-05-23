@@ -1,6 +1,5 @@
 package com.davendra.event_booking.modules.venue.entity;
 
-import com.davendra.event_booking.modules.event.entity.VenueEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
