@@ -27,7 +27,7 @@ public class BookingController {
     public ResponseEntity<ApiResponse<String>> reserveSeats(
     ) {
         return GlobalResponseHandler.success(
-                "Test ok!",
+                "Test ok chnages!",
                 HttpStatus.OK
         );
     }
